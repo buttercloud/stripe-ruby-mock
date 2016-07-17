@@ -547,7 +547,7 @@ module StripeMock
       {
         :status => 'pending',
         :amount => 100,
-        :account => {
+        :bank_account => {
           :object => 'bank_account',
           :country => 'US',
           :bank_name => 'STRIPE TEST BANK',

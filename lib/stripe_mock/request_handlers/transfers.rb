@@ -32,7 +32,7 @@ module StripeMock
       def new_transfer(route, method_url, params, headers)
         id = new_id('tr')
         if params[:bank_account]
-          params[:account] = get_bank_by_token(params.delete(:bank_account))
+          params[:bank_account] = get_bank_by_token(params.delete(:bank_account))
         end
 
         unless params[:amount].is_a?(Integer) || (params[:amount].is_a?(String) && /^\d+$/.match(params[:amount]))
