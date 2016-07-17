@@ -546,12 +546,20 @@ module StripeMock
       id = params[:id] || 'tr_test_transfer'
       {
         :status => 'pending',
+        :balance_transaction => "txn_00000000000000",
         :amount => 100,
         :bank_account => {
           :object => 'bank_account',
           :country => 'US',
-          :bank_name => 'STRIPE TEST BANK',
-          :last4 => '6789'
+          :currency => 'usd',
+          :account => 'acct_00000000000000',
+          :default_for_currency => false,
+          :fingerprint => 'BoBS64BqvgqBDUKQ',
+          :last4 => '6789',
+          :metadata => {},
+          :routing_number => '110000000',
+          :status => 'new',
+          :bank_name => 'STRIPE TEST BANK'
         },
         :recipient => 'test_recipient',
         :fee => 0,
