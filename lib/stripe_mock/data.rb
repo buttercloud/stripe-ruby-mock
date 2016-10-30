@@ -24,11 +24,11 @@ module StripeMock
         managed: false,
         product_description: nil,
         debit_negative_balances: true,
-        bank_accounts: {
+        external_accounts: {
           object: "list",
           total_count: 0,
           has_more: false,
-          url: "/v1/accounts/#{id}/bank_accounts",
+          url: "/v1/accounts/#{id}/external_accounts",
           data: [
 
           ]
