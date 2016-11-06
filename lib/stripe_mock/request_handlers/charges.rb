@@ -37,7 +37,9 @@ module StripeMock
 
         ensure_required_params(params)
 
-        charges[id] = Data.mock_charge(params.merge :id => id, :balance_transaction => new_balance_transaction('txn'))
+        charge = Data.mock_charge(params.merge :id => id)
+        charge[:balance_transaction] = new_balance_transaction('txn', charge)
+        charges[id] = charge
       end
 
       def update_charge(route, method_url, params, headers)
@@ -78,10 +80,10 @@ module StripeMock
 
         if params[:amount]
           refund = Data.mock_refund(
-            :balance_transaction => new_balance_transaction('txn'),
             :id => new_id('re'),
             :amount => charge[:amount] - params[:amount]
           )
+          refund[:balance_transaction] = new_balance_transaction('txn', refund)
           add_refund_to_charge(refund, charge)
         end
 
@@ -97,9 +99,9 @@ module StripeMock
         charge = get_charge(route, method_url, params, headers)
 
         refund = Data.mock_refund params.merge(
-          :balance_transaction => new_balance_transaction('txn'),
           :id => new_id('re')
         )
+        refund[:balance_transaction] = new_balance_transaction('txn', refund)
         add_refund_to_charge(refund, charge)
         charge
       end
@@ -108,10 +110,10 @@ module StripeMock
         charge = get_charge(route, method_url, params, headers)
 
         refund = Data.mock_refund params.merge(
-          :balance_transaction => new_balance_transaction('txn'),
           :id => new_id('re'),
           :charge => charge[:id]
         )
+        refund[:balance_transaction] = new_balance_transaction('txn', refund)
         add_refund_to_charge(refund, charge)
         refund
       end
