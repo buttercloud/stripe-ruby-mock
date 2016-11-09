@@ -9,6 +9,13 @@ shared_examples 'Country Spec API' do
       expect(country.id).to match /US/
     end
 
+    it 'retrieves a stripe country spec' do
+      country = Stripe::CountrySpec.retrieve('DE')
+
+      expect(country).to be_a Stripe::CountrySpec
+      expect(country.id).to match /DE/
+    end
+
     it "cannot retrieve a stripe country that doesn't exist", live: true do
       expect { Stripe::CountrySpec.retrieve('nope') }.to raise_error(Stripe::InvalidRequestError, "nope is not currently supported by Stripe.")
     end
