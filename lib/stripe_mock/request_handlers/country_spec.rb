@@ -9,7 +9,7 @@ module StripeMock
       def retrieve_country_spec(route, method_url, params, headers)
         route =~ method_url
 
-        unless ["AT", "AU", "BE", "CA", "DE", "DK", "ES", "FI", "FR", "GB", "IE", "IT", "JP", "LU", "NL", "NO", "SE", "SG", "US"].include?($1)
+        unless ["AT", "AU", "BE", "CA", "DK", "ES", "FI", "FR", "GB", "IE", "IT", "JP", "LU", "NL", "NO", "SE", "SG", "US"].include?($1)
           raise Stripe::InvalidRequestError.new("#{$1} is not currently supported by Stripe.", $1.to_s)
         end
 
